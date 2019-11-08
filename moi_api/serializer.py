@@ -1,14 +1,18 @@
 from rest_framework import serializers
-from .models import user,favorite  # import model
-
+from rest_framework_jwt.settings import api_settings
+from .models import favorite  # import model
+from django.contrib.auth.models import User
 
 # Create a class
-class userSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
-        fields = '__all__'
+        model = User
+        fields = ('email','created_at')
 
-class favoriteSerializer(serializers.ModelSerializer):
+class FavoriteSerializer(serializers.ModelSerializer):
     class Meta:
         model = favorite
         fields = '__all__'
+
+class MessageSerializer(serializers.Serializer):
+    message = serializers.CharField()
