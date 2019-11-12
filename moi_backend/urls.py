@@ -16,7 +16,6 @@ Including another URLconf
 from rest_framework_simplejwt import views as jwt_views
 from django.contrib import admin
 from django.urls import path, include
-from django_registration.backends.one_step.views import RegistrationView
 from moi_api.views import CreateUserAPIView
 
 urlpatterns = [
