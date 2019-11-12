@@ -23,7 +23,6 @@ SECRET_KEY = 'f2ac&w#@p2e5%oaqj*(7a7-&a(h*wh7rv3#etp@5mvxjb_b@1#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -36,12 +35,21 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'moi_api',
     'corsheaders',
+    'moi_api',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
+
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,11 +57,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    "http://localhost:3000",
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'moi_backend.urls'
@@ -83,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'moi_database',
-        'USER': 'moi_user1',
-        'PASSWORD': 'password',
+        'USER': 'moi_user',
+        'PASSWORD': 'm0i_U$er',
         'HOST': 'localhost',
         'PORT': '',
     }
