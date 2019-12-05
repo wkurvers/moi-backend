@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from rest_framework_jwt.settings import api_settings
-from .models import favorite  # import model
+from .models import favorite, User_SearchProfile  # import model
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
+from django.contrib.postgres.fields import ArrayField
 
 # Create a class
 class UserSerializer(serializers.ModelSerializer):
