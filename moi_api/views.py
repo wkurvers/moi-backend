@@ -7,8 +7,8 @@ from .models import User_SearchProfile
 from .serializer import CreateUserSerializer
 
 class CreateUserSearchProfileAPIView(CreateAPIView):
-	#permission_classes = [permissions.IsAuthenticated]
-	permission_classes = [permissions.AllowAny] #DEBUGGING ONLY
+	permission_classes = [permissions.IsAuthenticated]
+	#permission_classes = [permissions.AllowAny] #DEBUGGING ONLY
 
 	def validateData(self,data):
 		bags = data.get('bags',None)
@@ -18,20 +18,10 @@ class CreateUserSearchProfileAPIView(CreateAPIView):
 		themes = data.get('themes', None)
 		types = data.get('types', None)
 		workers = data.get('workers', None)
-		if( bags == None or
-			lawForms == None or
-			location == None or
-			startYear == None or
-			themes == None or
-			types == None or
-			workers == None):
-			return False
 		if( type(bags) != list or
 			type(lawForms) != list or
-			type(location) != dict or
 			type(startYear) != list or
 			type(themes) != list or
-			type(types) != list or
 			type(workers) != list):
 			return False
 		return True
@@ -39,9 +29,8 @@ class CreateUserSearchProfileAPIView(CreateAPIView):
 	def create(self, request, *args, **kwargs):
 		if(self.validateData(request.data)):
 			try:
-				user = User.objects.get(id=request.data.get('user'))
 				sp = User_SearchProfile(
-					user=user,
+					user=request.user,
 					scheme_names = request.data.get('themes'),
 					location_distance = request.data.get('location')['distance'],
 					location_position_lat = request.data.get('location')['position']['lat'],
