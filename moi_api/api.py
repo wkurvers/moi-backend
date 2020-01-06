@@ -18,4 +18,3 @@ class FavoriteViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated
     ]
     serializer_class = FavoriteSerializer
-
